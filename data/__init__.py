@@ -1,6 +1,4 @@
-from data.GameData import GameData
-from data.gameInit import init_game_with_defaults
-
+from models.GameData import GameData
 
 game_data_storage = dict()
 

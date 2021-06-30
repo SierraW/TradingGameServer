@@ -1,6 +1,5 @@
-from data.gameInit import init_game_with_defaults
+from controllers.game_init import init_game_with_defaults
 from database import db_notification_ref, delete_collection, get_db
-import json
 
 
 def initialize_game(command=None):

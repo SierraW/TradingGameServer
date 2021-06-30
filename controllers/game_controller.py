@@ -1,7 +1,7 @@
 from data import get_game_data
 from database import *
-from controllers.propertyController import property_loop
-from controllers.cityController import cities_loop
+from controllers.property_controller import property_loop
+from controllers.city_controller import cities_loop
 
 
 def records_loop():
