@@ -1,5 +1,14 @@
 from data import GameData
 from models.FinancialEntity import FinancialEntity
+from models.cities.Population import Population
+
+
+def get_population_fe_id(population: Population, level: int) -> str:
+    return population.fe_accounts[level]
+
+
+def get_financial_entity(game_data: GameData, fe_id: str) -> FinancialEntity:
+    return game_data.financial_entities[fe_id]
 
 
 def register_financial_entity(game_data: GameData, name: str, entity_type: int) -> str:
@@ -9,17 +18,30 @@ def register_financial_entity(game_data: GameData, name: str, entity_type: int) 
     return fe_id
 
 
+def remove_financial_entity(game_data: GameData, fe_id: str) -> bool:
+    if fe_id not in game_data.financial_entities:
+        return False
+    fe = game_data.financial_entities[fe_id]
+    wallet = fe.wallet
+    for _, amount in wallet.currencies:
+        if amount > 0:
+            return False
+    del game_data.financial_entities[fe_id]
+    return True
+
+
 def verify(game_data: GameData, fe_id: str) -> bool:
     return fe_id in game_data.financial_entities
 
 
 def transfer(game_data: GameData, sender_fe_id: str, receiver_fe_id: str, currency_id, amount) -> bool:
+    success = False
     if sender_fe_id in game_data.financial_entities and receiver_fe_id in game_data.financial_entities:
         sender_fe = game_data.financial_entities[sender_fe_id]
         receiver_fe = game_data.financial_entities[receiver_fe_id]
-        success = True
         if _pay(fe=sender_fe, currency_id=currency_id, amount=amount):
             _receive(fe=receiver_fe, sender_fe_id=sender_fe_id, currency_id=currency_id, amount=amount)
+            success = True
         else:
             success = False
         t_plus = game_data.environment.time.get_t_plus_from_now()
@@ -36,7 +58,7 @@ def transfer(game_data: GameData, sender_fe_id: str, receiver_fe_id: str, curren
         if success:
             _record(fe=receiver_fe, target_fe_id=sender_fe_id, target_fe=sender_fe, currency_id=currency_id,
                     amount=amount, t_plus=t_plus)
-    return amount > 0
+    return success
 
 
 def count(game_data: GameData, fe_id: str, currency_id: str) -> int:

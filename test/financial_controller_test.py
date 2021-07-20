@@ -8,8 +8,8 @@ init_game_with_defaults(game_data=game_data)
 gold_id = 'GOLD'
 
 print("Register User Profile")
-urer_a = register_user_profile(game_data=game_data, user_identifier='urer_a', name='urer_a')
-urer_b = register_user_profile(game_data=game_data, user_identifier='urer_b', name='urer_b')
+urer_a = register_user_profile(game_data=game_data, user_identifier='user_a_fe_id', name='user_a_fe_id')
+urer_b = register_user_profile(game_data=game_data, user_identifier='user_b_fe_id', name='user_b_fe_id')
 
 u_a_fe = game_data.financial_entities[urer_a]
 u_b_fe = game_data.financial_entities[urer_b]

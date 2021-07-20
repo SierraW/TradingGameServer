@@ -6,7 +6,8 @@ class Human(object):
         self.level = level
         self.buffs = {
             'wohaole': 0.0,
-            'woele': 0.0
+            'woele': 0.0,
+            'buff_human_satisfaction': 0.0
         }
         self.property_id = None
         self.contract_remaining_days = None

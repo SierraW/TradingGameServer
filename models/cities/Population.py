@@ -1,26 +1,31 @@
 from models.Human import Human
+from models.cities.HumanOffer import HumanOffer
 
 
 class Population(object):
-    def __init__(self, humans=None):
+    def __init__(self, salaries: list[int], fe_accounts: list[str], humans=None):
         if humans is None:
             humans = []
-        self.humans = []
-        self.salaries = [0 * 4]
+        self.humans = humans
+        self.salaries = salaries
+        self.fe_accounts = fe_accounts
+        self.offers = []
 
     @staticmethod
     def from_dict(source):
-        population = Population()
+        population = Population(salaries=source['salaries'], fe_accounts=source['fe_accounts'])
         if 'humans' in source:
             population.humans = list(map(lambda human_dict: Human.from_dict(human_dict), source['humans']))
-        if 'salaries' in source:
-            population.salaries = source['salaries']
+        if 'offers' in source:
+            population.offers = list(map(lambda offer: HumanOffer.from_dict(offer), source['offers']))
         return population
 
     def to_dict(self):
         return {
             'humans': list(map(lambda human: human.to_dict(), self.humans)),
-            'salaries': self.salaries
+            'salaries': self.salaries,
+            'fe_accounts': self.fe_accounts,
+            'offers': list(map(lambda offer: offer.to_dict(), self.offers))
         }
 
     def __repr__(self):

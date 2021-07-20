@@ -1,28 +1,28 @@
-from models.cities.property.Property import Property
 from models.cities.Population import Population
 from models.cities.property.Production import Production
-from models.cities.Market import Market
 
 
 class City(object):
-    def __init__(self, country_id: str, name: str, financial_id: str, currency_id: str):
+    def __init__(self, country_id: str, name: str, financial_id: str, currency_id: str,
+                 population: Population, land_tax_rate: float):
         self.country_id = country_id
         self.city_id = None
         self.name = name
         self.financial_id = financial_id
         self.currency_id = currency_id
         self.productions = []
-        self.population = Population()
+        self.population = population
         self.market_id = None
         self.property_counter = 0
+        self.land_tax_rate = land_tax_rate
 
     @staticmethod
     def from_dict(source):
-        city = City(source['country_id'], source['name'], source['financial_id'], currency_id=source['currency_id'])
+        city = City(source['country_id'], source['name'], source['financial_id'], currency_id=source['currency_id'],
+                    land_tax_rate=source['land_tax_rate'], population=Population.from_dict(source['population']))
         if 'productions' in source:
-            city.productions = list(map(lambda production_dict: Production.from_dict(production_dict), source['productions']))
-        if 'population' in source:
-            city.population = Population.from_dict(source['population'])
+            city.productions = list(map(lambda production_dict: Production.from_dict(production_dict),
+                                        source['productions']))
         if 'market_id' in source:
             city.market_id = source['market_id']
         if 'property_counter' in source:
@@ -39,7 +39,8 @@ class City(object):
             'population': self.population.to_dict(),
             'market_id': self.market_id,
             'property_counter': self.property_counter,
+            'land_tax_rate': self.land_tax_rate
         }
 
     def __repr__(self):
-        return f'City(name={self.name})'
+        return self.to_dict().__repr__()

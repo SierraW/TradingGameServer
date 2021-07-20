@@ -18,14 +18,3 @@ class Buff(object):
             'key_effect_data': self.key_effect_data,
             'description': self.description
         }
-
-    def get_effects_str(self) -> list[str]:
-        detailed_effects = []
-        count = 0
-        for effect in self.effects:
-            if count >= len(self.key_effect_data):
-                detailed_effects.append(effect)
-            else:
-                detailed_effects.append(effect.replace('/$', str(self.key_effect_data[count])))
-            count += 1
-        return detailed_effects

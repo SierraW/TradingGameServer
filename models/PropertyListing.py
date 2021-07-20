@@ -22,3 +22,6 @@ class PropertyListing(object):
             'price': self.price,
             'target_buyer_fe_id': self.target_buyer_fe_id
         }
+
+    def __repr__(self):
+        return self.to_dict().__repr__()
