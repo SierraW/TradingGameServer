@@ -33,7 +33,7 @@ for listing in game_data.market_listings:
     purchase_single(game_data=game_data, buyer_fe_id=user_b_fe_id, listing_id=listing, amount=50)
 
 
-com_a_fe_id = register_company(game_data=game_data, name="Apple", city_id=heidal_city_id, initial_stock_distribution={
+com_a_fe_id = company_register_company(game_data=game_data, name="Apple", city_id=heidal_city_id, initial_stock_distribution={
     user_a_fe_id: 9000,
     user_b_fe_id: 1000
 }, fund_distribution={
@@ -50,7 +50,7 @@ print(game_data.property_listings)
 print(get_properties(game_data=game_data, company_fe_id=com_a_fe_id))
 pls = [lid for lid in game_data.property_listings]
 for listing_id in pls:
-    print(purchase_property(game_data=game_data, prop_listing_id=listing_id, buyer_fe_id=com_a_fe_id))
+    print(property_purchase_property(game_data=game_data, prop_listing_id=listing_id, buyer_fe_id=com_a_fe_id))
 print(game_data.financial_entities[com_a_fe_id].wallet)
 print(game_data.property_listings)
 print(get_properties(game_data=game_data, company_fe_id=com_a_fe_id))

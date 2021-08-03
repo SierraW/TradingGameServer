@@ -1,7 +1,7 @@
 class Market(object):
     def __init__(self, market_id, city_id, financial_id, storage_id, name, currency_id: str, handling_fee_rate):
         self.financial_id = financial_id
-        self.market_id = market_id
+        self.property_id = market_id
         self.city_id = city_id
         self.storage_id = storage_id
         self.name = name

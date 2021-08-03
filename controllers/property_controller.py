@@ -1,7 +1,7 @@
 from controllers.algorithm_club import find_most_common_level, find_desired_employee_amount
-from controllers.financial_controller import transfer, count
-from controllers.market_controller import auto_register_market_listing, get_previous_average_price, \
-    get_lowest_listing_price_for_product
+from controllers.financial_controller import transfer, financial_count
+from controllers.market_controller import market_get_recommended_pricing, get_previous_average_price, \
+    market_get_lowest_listing_price_for_product, market_register_product
 from controllers.population_controller import get_employees, get_employee_salary, \
     unemployed_all_employees_except, remove_all_previous_offer_by_property_id, send_offer, unemployed
 from controllers.storage_controller import *
@@ -12,6 +12,10 @@ from models.PropertyListing import PropertyListing
 from models.cities.City import City
 from models.cities.property.Production import Production
 from models.cities.property.Property import Property
+
+
+def property_get_property(game_data: GameData, prop_id: str) -> Property:
+    return game_data.properties[prop_id]
 
 
 def properties_loop(game_data: GameData):
@@ -46,8 +50,7 @@ def property_loop(game_data: GameData, prop_id: str, prop: Property, company: Co
     # assign prop size
     if prop.production is not None:
         size = property_size(employee_list=employee_list,
-                             production_level=prop.production.level if prop.production is not
-                                                                       None else 0)
+                             production_level=prop.production.level if prop.production is not None else 0)
         production_loop(game_data=game_data, prop=prop, prop_size=size)
     if prop.auto_managed:
         auto_management(game_data=game_data, company=company, employees=employee_list, city=city, prop_id=prop_id,
@@ -68,7 +71,8 @@ def _auto_management_choose_production_and_manage_human_resources(game_data: Gam
     employees = unemployed_all_employees_except(level=preferred_level, employees=employees)
     preferred_prop_size = find_desired_employee_amount(num_of_employee=len(employees))
     preferred_prop_size_level = 1 if preferred_prop_size < 4 else 2
-    productions_choose = list(filter(lambda production: production.level == preferred_level, city.productions))
+    productions_choose = list(filter(lambda temp_production: temp_production.level == preferred_level,
+                                     city.productions))
     most_profitable_production = None
     max_approx_profit = 0
     for production in productions_choose:
@@ -77,7 +81,8 @@ def _auto_management_choose_production_and_manage_human_resources(game_data: Gam
                                                targeted_level=preferred_prop_size_level)
         cost = get_estimated_cost_per_year(game_data=game_data, city=city, production=production,
                                            targeted_level=preferred_prop_size_level)
-        if count(game_data=game_data, fe_id=prop.financial_id, currency_id=city.currency_id) > int(cost * 0.5):
+        if financial_count(game_data=game_data, fe_id=prop.financial_id, currency_id=city.currency_id) > int(
+                cost * 0.5):
             if income is None:
                 most_profitable_production = production
                 break
@@ -132,19 +137,26 @@ def get_estimated_income_per_year(game_data: GameData, city: City, production: P
         price = get_previous_average_price(game_data=game_data, market_id=city.market_id, product_id=product,
                                            currency_id=city.currency_id)
         if price is None:
-            price = get_lowest_listing_price_for_product(game_data=game_data, market_id=city.market_id,
-                                                         product_id=product)
+            price = market_get_lowest_listing_price_for_product(game_data=game_data, market_id=city.market_id,
+                                                                product_id=product)
             if price is None:
                 return None
         income += int(price * value * num_of_productions_made)
     return income
 
 
-def g_new_property(game_data: GameData, city: City):
+def property_generate_property(game_data: GameData, city_id: str, city: City = None, name: str = None):
     prop_id = game_data.generate_identifier()
+    if city is None:
+        from controllers.city_controller import city_get_city
+        city = city_get_city(game_data=game_data, city_id=city_id)
     city.property_counter += 1
-    game_data.properties[prop_id] = Property(city_id=city.city_id, name=f'No.{city.property_counter}',
-                                             financial_id=city.financial_id, auto_managed=False)
+    storage_id = storage_create_a_storage(game_data=game_data, location=prop_id, owner_fe_id=city.financial_id,
+                                          city_id=city_id)
+    game_data.properties[prop_id] = Property(city_id=city.city_id,
+                                             name=name if name is not None else f'No.{city.property_counter}',
+                                             financial_id=city.financial_id, auto_managed=False,
+                                             storage_id=storage_id)
     return prop_id
 
 
@@ -175,7 +187,7 @@ def _start_procedure(game_data: GameData, prop: Property, prop_size: int) -> boo
         if game_data.environment.time.season == 1 or game_data.environment.time.season == 3:
             return False
     if prop.production.consumes is not None:
-        if not remove_from_storage(game_data, prop.production.get_consumes(prop_size), prop.storage_in_id):
+        if not storage_remove_from_storage(game_data, prop.production.get_consumes(prop_size), prop.storage_in_id):
             return False
     return True
 
@@ -194,7 +206,7 @@ def get_end_products_after_multiplier(game_data: GameData, production: Productio
     if 'wobaole' in production.buffs:
         buff = game_data.buffs['wobaole']
         end_multiplier *= buff.key_effect_data[0]
-    return  {k: int(v * end_multiplier) for k, v in production.products.items()}
+    return {k: int(v * end_multiplier) for k, v in production.products.items()}
 
 
 def _end_production(game_data: GameData, prop: Property, prop_size: int):
@@ -209,12 +221,23 @@ def _end_production(game_data: GameData, prop: Property, prop_size: int):
             price = get_estimated_cost_per_year(game_data=game_data, city=city,
                                                 production=prop.production, targeted_level=prop_size)
             price = price / 120 * prop.production.duration / amount
-            auto_register_market_listing(game_data=game_data, market_id=market_id, seller_fe_id=prop.financial_id,
-                                         product_id=product_id, amount=amount,
-                                         recommended_price_per_unit=int(price*1.2), bottom_price_per_unit=int(price),
-                                         currency_id=city.currency_id, auto_register=True)
+            price = market_get_recommended_pricing(game_data=game_data, market_id=market_id,
+                                                   product_id=product_id,
+                                                   recommended_price_per_unit=int(price * 1.2),
+                                                   bottom_price_per_unit=int(price),
+                                                   currency_id=city.currency_id)
+            market_register_product(game_data=game_data,
+                                    market_id=market_id,
+                                    seller_fe_id=prop.financial_id,
+                                    product_id=product_id,
+                                    amount=amount,
+                                    currency_id=city.currency_id,
+                                    price_per_unit=price,
+                                    is_retail_sale=False,
+                                    storage_id=prop.storage_id
+                                    )  # remove this
     else:
-        add_to_storage(game_data, end_products, prop.storage_out_id)
+        storage_add_to_storage(game_data, end_products, prop.storage_out_id)
 
 
 def get_properties(game_data: GameData, company_fe_id: str) -> dict:
@@ -225,8 +248,8 @@ def get_properties(game_data: GameData, company_fe_id: str) -> dict:
     return fetch_result
 
 
-def register_property_for_sale(game_data: GameData, prop_id: str, seller_fe_id: str, price: int = None,
-                               currency_id: str = None, target_buyer_fe_id: str = None):
+def property_register_property_for_sale(game_data: GameData, prop_id: str, seller_fe_id: str, price: int = None,
+                                        currency_id: str = None, target_buyer_fe_id: str = None):
     if prop_id not in game_data.properties:
         print('register property failed: property not existed')
         return
@@ -262,21 +285,27 @@ def get_property_listings(game_data: GameData, city_id: str) -> dict:
     return fetch_result
 
 
-def purchase_property(game_data: GameData, prop_listing_id: str, buyer_fe_id: str) -> bool:
+def property_purchase_property(game_data: GameData, prop_listing_id: str, buyer_fe_id: str) -> bool:
     if prop_listing_id not in game_data.property_listings:
-        print('purchase failed: cannot find property listing')
+        print('market_purchase failed: cannot find property listing')
         return False
     prop_listing = game_data.property_listings[prop_listing_id]
     prop = game_data.properties[prop_listing.property_id]
     if prop_listing.target_buyer_fe_id is not None and prop_listing.target_buyer_fe_id != buyer_fe_id:
-        print('purchase failed: permission denied')
+        print('market_purchase failed: permission denied')
         return False
     if transfer(game_data=game_data, sender_fe_id=buyer_fe_id, receiver_fe_id=prop.financial_id,
                 currency_id=prop_listing.currency_id, amount=prop_listing.price):
         prop.financial_id = buyer_fe_id
-        prop.production = None
-        prop.auto_managed = True
-
+        property_remove_task(prop=prop)
         del game_data.property_listings[prop_listing_id]
         return True
     return False
+
+
+def property_remove_task(prop: Property):
+    prop.production = None
+    prop.storage_out_id = prop.storage_id
+    prop.storage_in_id = prop.storage_id
+    prop.auto_register_market_id = None
+    prop.auto_managed = False

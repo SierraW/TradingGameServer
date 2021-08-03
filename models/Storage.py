@@ -1,17 +1,28 @@
 class Storage(object):
-    def __init__(self, products=None):
+    def __init__(self, owner_fe_id: str, location: str, city_id: str, size: int = None, products: dict = None):
         if products is None:
             products = dict()
         self.products = products
+        self.size = size
+        self.occupied = 0
+        for _, value in products.items():
+            self.occupied += value
+        self.location = location
+        self.city_id = city_id
+        self.owner_fe_id = owner_fe_id
 
     @staticmethod
     def from_dict(source):
-        storage = Storage(source)
-        return storage
+        return Storage(owner_fe_id=source['owner_fe_id'], size=source['size'], products=source['products'],
+                       location=source['storage_id'], city_id=source['city_id'])
 
     def to_dict(self):
         return {
-            'products': self.products
+            'size': self.size,
+            'products': self.products,
+            'storage_id': self.location,
+            'owner_fe_id': self.owner_fe_id,
+            'city_id': self.city_id
         }
 
     def __repr__(self):

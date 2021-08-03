@@ -6,6 +6,9 @@ from controllers.market_controller import market_listings_loop
 
 
 def day_end_loop(game_data: GameData):
+    if game_data.environment.time.pause:
+        return
+
     # consume
     cities_loop(game_data=game_data)
 

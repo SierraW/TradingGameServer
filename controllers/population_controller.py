@@ -1,24 +1,22 @@
 import copy
 import random
-import sys
 
-from controllers.market_controller import purchase_by_category, purchase
+from controllers.market_controller import market_purchase_by_category, market_purchase
 from controllers.random_controller import check_random_result
 from data import GameData
 from models.Human import Human
-from models.Storage import Storage
 from models.cities.City import City
 from models.cities.HumanOffer import HumanOffer
 from models.cities.Population import Population
 from models.cities.property.Property import Property
-from controllers.financial_controller import transfer, count, get_population_fe_id
+from controllers.financial_controller import transfer, financial_count, get_population_fe_id
 
 
 def population_loop(game_data: GameData, city: City):
-    budget = count(game_data=game_data, fe_id=city.financial_id, currency_id=city.currency_id)
-    food_bank = purchase_by_category(game_data=game_data, buyer_fe_id=city.financial_id, category=0,
-                                     amount_required=len(city.population.humans), market_id=city.market_id,
-                                     available_budget=budget)
+    budget = financial_count(game_data=game_data, fe_id=city.financial_id, currency_id=city.currency_id)
+    food_bank = market_purchase_by_category(game_data=game_data, buyer_fe_id=city.financial_id, category=0,
+                                            amount_required=len(city.population.humans), market_id=city.market_id,
+                                            available_budget=budget, destination_storage_id=city.population.storage_id)
     human_dead(population=city.population, food_supply_amount=food_bank.amount)
     human_needs = copy.deepcopy(game_data.environment.human_needs)
     breed_count = 0
@@ -27,36 +25,37 @@ def population_loop(game_data: GameData, city: City):
         if human.property_id is None:
             get_a_job(game_data=game_data, human=human, city=city)
         else:
-            brought = purchase(game_data=game_data, buyer_fe_id=city.population.fe_accounts[human.level],
-                               products=human_needs[human.level], market_id=city.market_id,
-                               budget=int(get_employee_salary(population=city.population, level=human.level)))
+            brought = market_purchase(game_data=game_data, buyer_fe_id=city.population.fe_accounts[human.level],
+                                      products=human_needs[human.level], market_id=city.market_id,
+                                      destination_storage_id=city.population.storage_id,
+                                      budget=int(get_employee_salary(population=city.population, level=human.level)))
             human_satisfy(human=human, products=brought, required=human_needs[human.level])
-    for _ in range(breed_count):
+    for _ in range(breed_count % 10):
         b_new_human(city=city)
 
 
 def human_satisfy(human: Human, products: dict, required: dict):
-    max = 0
+    popu_max = 0
     count = 0
     for pid, amount in required.items():
         if pid in products:
             if amount <= products[pid]:
-                max += amount
+                popu_max += amount
                 count += amount
             else:
-                max += amount
+                popu_max += amount
                 count += products[pid]
         else:
-            max += amount
+            popu_max += amount
     if 'buff_human_satisfaction' in human.buffs:
-        if max - count == 0:
+        if popu_max - count == 0:
             if human.buffs['buff_human_satisfaction'] < 0.99:
                 human.buffs['buff_human_satisfaction'] += 0.01
         else:
             if human.buffs['buff_human_satisfaction'] < 0.1:
                 human.buffs['buff_human_satisfaction'] = 0
             else:
-                human.buffs['buff_human_satisfaction'] -= 0.01 * (max - count) if max - count < 10 else 10
+                human.buffs['buff_human_satisfaction'] -= 0.01 * (popu_max - count) if popu_max - count < 10 else 10
         if check_random_result(human.buffs['buff_human_satisfaction']):
             human.buffs['buff_human_satisfaction'] = 0.0
             if human.level < 3:
@@ -102,7 +101,7 @@ def priority_human(humans: list[Human]):
     if len(humans) == 0:
         print('PopulationController priority_human: No humans available for selecting.')
         return
-    list_of_humans_awaiting = list(filter(lambda human: human.property_id is None, humans))
+    list_of_humans_awaiting = list(filter(lambda temp_human: temp_human.property_id is None, humans))
     if len(list_of_humans_awaiting) == 0:
         list_of_humans_awaiting = humans
     selected_humans = []
@@ -154,9 +153,9 @@ def get_a_job(game_data: GameData, human: Human, city: City):
 def accept_offer(game_data: GameData, city: City, human: Human, human_offer: HumanOffer):
     if human_offer.one_time_payment > 0:
         if not transfer(game_data=game_data, sender_fe_id=human_offer.company_id,
-                    receiver_fe_id=get_population_fe_id(population=city.population, level=human.level),
-                    currency_id=city.currency_id,
-                    amount=human_offer.one_time_payment):
+                        receiver_fe_id=get_population_fe_id(population=city.population, level=human.level),
+                        currency_id=city.currency_id,
+                        amount=human_offer.one_time_payment):
             return
     human.property_id = human_offer.property_id
     city.population.offers.remove(human_offer)

@@ -59,29 +59,18 @@ property_b = game_data.properties['11']
 storage_a = game_data.storages['9']
 storage_b = game_data.storages['11']
 
-print(storage_add_to_storage(game_data=game_data, products={wheat: 1000}, storage_id=company_a.property_id))
-print(storage_add_to_storage(game_data=game_data, products={wheat: 1000}, storage_id=company_b.property_id))
+print(storage_add_to_storage(game_data=game_data, products={wheat: 10000}, storage_id=company_a.property_id))
 
 print('register product to wholesale market')
 print(market_register_product(game_data=game_data, market_id=market_id, seller_fe_id=company_a_id, product_id=wheat,
                               amount=500, currency_id=gold_id, price_per_unit=100, is_retail_sale=False,
                               storage_id=company_a.property_id))
 
-print('company a is trying to access the retail market')
-print(market_register_product(game_data=game_data, market_id=market_id, seller_fe_id=company_a_id, product_id=wheat,
-                              amount=500, currency_id=gold_id, price_per_unit=100, is_retail_sale=True,
-                              storage_id=company_a.property_id))
-
-print('company a has no more product to register')
 print(market_register_product(game_data=game_data, market_id=market_id, seller_fe_id=company_a_id, product_id=wheat,
                               amount=1500, currency_id=gold_id, price_per_unit=100, is_retail_sale=False,
                               storage_id=company_a.property_id))
 
-print('company b buying')
-print(market_purchase_wholesale(game_data=game_data, buyer_fe_id=company_b_id, listing_id='17',
-                                destination_storage_id=company_b.property_id))
 
-print('company b access the retail market')
-print(market_register_product(game_data=game_data, market_id=market_id, seller_fe_id=company_b_id, product_id=wheat,
-                              amount=1500, currency_id=gold_id, price_per_unit=100, is_retail_sale=True,
-                              storage_id=company_b.property_id))
+company_b.auto_managed = True
+companies_loop(game_data=game_data)
+companies_loop(game_data=game_data)
