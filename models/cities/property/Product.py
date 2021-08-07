@@ -1,18 +1,16 @@
 class Product(object):
-    def __init__(self, name: str, category: int):
+    def __init__(self, name: str, category: int, items_per_stack: int):
         self.name = name
         self.category = category
+        self.items_per_stack = items_per_stack
 
     @staticmethod
     def from_dict(source):
-        product = Product(source['name'], source['category'])
-        return product
+        return Product(name=source['name'], category=source['source'], items_per_stack=source['items_per_stack'])
 
     def to_dict(self):
         return {
             'name': self.name,
-            'category': self.category
+            'category': self.category,
+            'items_per_stack': self.items_per_stack
         }
-
-    def __repr__(self):
-        return f'Product(name={self.name}, category={self.category})'

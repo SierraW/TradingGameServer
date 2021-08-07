@@ -1,61 +1,25 @@
-from models.cities.property.Product import Product
+from models.cities.personality.PersonalityExperience import PersonalityExperience
 
 
 class Production(object):
-    def __init__(self, name: str, products: dict, level: int, product_multiplier: list[float], duration: int,
-                 consumes: dict = None,  consume_multiplier: list[float] = None):
+    def __init__(self, name: str, products: dict, designo_multiplier: int, software_solution_multiplier: int,
+                 experience_required: list[PersonalityExperience], experience_acquire: list[PersonalityExperience],
+                 experience_acquire_chance: list[float], required_structure: ,
+                 work_force: int, duration: int, number_of_min_employees: int, number_of_max_employees: int,
+                 consumes: dict = None, designo_id: str = None, software_solution_id: str = None):
         self.name = name
         self.consumes = consumes
-        self.consume_multiplier = consume_multiplier
         self.products = products
-        self.product_multiplier = product_multiplier
-        self.level = level
+        self.designo_id = designo_id
+        self.designo_multiplier = designo_multiplier
+        self.software_solution_id = software_solution_id
+        self.software_solution_multiplier = software_solution_multiplier
+        self.experience_required = experience_required
+        self.experience_acquire = experience_acquire
+        self.experience_acquire_chance = experience_acquire_chance
+        self.required_structure =
+        self.work_force = work_force
         self.duration = duration
-        self.num_of_days_remaining = None
+        self.number_of_min_employees = number_of_min_employees
+        self.number_of_max_employees = number_of_max_employees
         self.buffs = dict()
-
-    @staticmethod
-    def from_dict(source):
-        production = Production(name=source['name'], products=source['products'], level=source['level'],
-                                product_multiplier=source['product_multiplier'], duration=source['duration'])
-        if 'consumes' in source:
-            production.consumes = source['consumes']
-        if 'consume_multiplier' in source:
-            production.consume_multiplier = source['consume_multiplier']
-        if 'num_of_days_remaining' in source:
-            production.num_of_days_remaining = source['num_of_days_remaining']
-        if 'buffs' in source:
-            production.buffs = source['buffs']
-        return production
-
-    def to_dict(self):
-        return {
-            'name': self.name,
-            'level': self.level,
-            'consumes': self.consumes,
-            'consume_multiplier': self.consume_multiplier,
-            'product': self.products,
-            'product_multiplier': self.product_multiplier,
-            'duration': self.duration,
-            'num_of_days_remaining': self.num_of_days_remaining,
-            'buffs': self.buffs
-        }
-
-    def __repr__(self):
-        return f'Production(name={self.name}, consumes={self.consumes}, product={self.products}, \
-        duration={self.duration})'
-
-    def get_consumes(self, level: int) -> dict:
-        multiplied_consumes = dict()
-        if self.consumes is None:
-            return multiplied_consumes
-        for key, value in self.consumes.items():
-            multiplied_consumes[key] = value * self.consume_multiplier[level]
-        return multiplied_consumes
-
-    def start_production(self):
-        self.num_of_days_remaining = self.duration
-        self.buffs = dict()
-
-    def get_multiplier(self, level: int) -> float:
-        return self.product_multiplier[level]

@@ -1,4 +1,3 @@
-import debug_toolkit
 from controllers.property_controller import property_generate_property, property_register_property_for_sale, \
     property_purchase_property
 from controllers.storage_controller import storage_create_a_storage, storage_add_to_storage
@@ -6,11 +5,12 @@ from controllers.company_controller import company_register_company, company_reg
 from models.Buff import Buff
 from models.FinancialEntity import FinancialEntity
 from models.GameData import GameData
-from models.Human import Human
+from models.cities.personality.Human import Human
 from models.TGEnviroment import TGEnvironment
 from models.cities.City import City
 from models.cities.Market import Market
-from models.cities.Population import Population
+from models.cities.personality.PersonalityExperience import PersonalityExperience
+from models.cities.personality.Population import Population
 from models.cities.property.Product import Product
 from models.cities.property.Production import Production
 from models.geometry.Country import Country
@@ -132,6 +132,14 @@ def init_game_with_defaults(game_data: GameData):
             '该城市有/v的几率产出精英人才'
         ], key_effects_data=[], description=''),
     }
+
+    # experience
+    exp_food_bun = PersonalityExperience(experience_name='馒头', experience_description='一类食物',
+                                         experience_formation_time=-1)
+    exp_food_seafood = PersonalityExperience(experience_name='海鲜', experience_description='一类食物',
+                                             experience_formation_time=-1)
+
+    exp_stu_elementary =
 
     # product
     # cat 0: food, 1: lvl_1_consumes

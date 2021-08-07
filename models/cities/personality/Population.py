@@ -1,4 +1,4 @@
-from models.Human import Human
+from models.cities.personality.Human import Human
 from models.cities.HumanOffer import HumanOffer
 
 

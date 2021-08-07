@@ -1,7 +1,6 @@
-import debug_toolkit
 from data import GameData
 from models.FinancialEntity import FinancialEntity
-from models.cities.Population import Population
+from models.cities.personality.Population import Population
 from models.report.Transaction import Transaction
 
 

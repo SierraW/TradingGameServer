@@ -1,4 +1,4 @@
-from models.cities.Population import Population
+from models.cities.personality.Population import Population
 from models.cities.property.Production import Production
 
 

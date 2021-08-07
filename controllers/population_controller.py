@@ -4,10 +4,10 @@ import random
 from controllers.market_controller import market_purchase_by_category, market_purchase
 from controllers.random_controller import check_random_result
 from data import GameData
-from models.Human import Human
+from models.cities.personality.Human import Human
 from models.cities.City import City
 from models.cities.HumanOffer import HumanOffer
-from models.cities.Population import Population
+from models.cities.personality.Population import Population
 from models.cities.property.Property import Property
 from controllers.financial_controller import transfer, financial_count, get_population_fe_id
 

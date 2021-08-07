@@ -7,7 +7,7 @@ from controllers.population_controller import get_employees, get_employee_salary
 from controllers.storage_controller import *
 from models.Company import Company
 from models.GameData import GameData
-from models.Human import Human
+from models.cities.personality.Human import Human
 from models.PropertyListing import PropertyListing
 from models.cities.City import City
 from models.cities.property.Production import Production

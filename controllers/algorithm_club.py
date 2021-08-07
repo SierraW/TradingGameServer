@@ -1,4 +1,4 @@
-from models.Human import Human
+from models.cities.personality.Human import Human
 
 
 def find_most_common_level(humans: list[Human]) -> int:
