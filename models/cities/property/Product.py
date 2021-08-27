@@ -6,7 +6,7 @@ class Product(object):
 
     @staticmethod
     def from_dict(source):
-        return Product(name=source['name'], category=source['source'], items_per_stack=source['items_per_stack'])
+        return Product(name=source['name'], category=source['category'], items_per_stack=source['items_per_stack'])
 
     def to_dict(self):
         return {

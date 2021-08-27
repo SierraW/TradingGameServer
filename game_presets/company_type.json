@@ -1,0 +1,35 @@
+{
+  "company_type_investment_company": {
+    "name": "Investment Company",
+    "company_scope_id": "scope_1",
+    "designated_structures": [
+      "structure_id_0",
+      "structure_id_1",
+      "structure_id_2"
+    ],
+    "stock_market_visibility": 0,
+    "stock_market_access_type": 1
+  },
+  "company_type_advanced_manufacture_company": {
+    "name": "Advanced Manufacture Company",
+    "company_scope_id": "company_scope_advanced_manufacturer",
+    "designated_structures": [
+      "structure_id_0",
+      "structure_id_1",
+      "structure_id_2"
+    ],
+    "stock_market_visibility": 3,
+    "stock_market_access_type": 4
+  },
+  "company_type_manufacture_company": {
+    "name": "Manufacture Company",
+    "company_scope_id": "scope_1",
+    "designated_structures": [
+      "structure_id_0",
+      "structure_id_1",
+      "structure_id_2"
+    ],
+    "stock_market_visibility": 2,
+    "stock_market_access_type": 4
+  }
+}

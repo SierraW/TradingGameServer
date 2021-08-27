@@ -12,6 +12,7 @@ class Storage(object):
             product_stacks = []
         self.product_stacks = product_stacks
         self.size = size
+        self.workforces = []
         self.location = location
         self.city_id = city_id
         self.owner_fe_id = owner_fe_id

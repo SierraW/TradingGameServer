@@ -1,0 +1,52 @@
+{
+  "experience_bachelor_of_engineering": {
+    "name": "Field",
+    "description": "Learned from working at field.",
+    "formation_time": -260
+  },
+  "experience_bachelor_of_education": {
+    "name": "Bachelor of Education",
+    "description": "Degree required to teach in k-12 schools. Learned from college or university.",
+    "formation_time": -260
+  },
+  "experience_master_of_education": {
+    "name": "Master of Education",
+    "description": "Degree required to teach in college or university. Learned from college or university.",
+    "formation_time": -260
+  },
+  "experience_fishery": {
+    "name": "Fishery Experience",
+    "description": "Knowledge about fishing.",
+    "formation_time": 0
+  },
+  "experience_field": {
+    "name": "Field Experience",
+    "description": "Knowledge about farming.",
+    "formation_time": 0
+  },
+  "experience_bachelor_of_agriculture": {
+    "name": "Bachelor of Agriculture",
+    "description": "Land Manager",
+    "formation_time": -260
+  },
+  "experience_forestry": {
+    "name": "Forestry Experience",
+    "description": "Knowledge about forest.",
+    "formation_time": 0
+  },
+  "experience_mining": {
+    "name": "Mining Experience",
+    "description": "Knowledge about mining.",
+    "formation_time": 0
+  },
+  "experience_certificate_safety_steel_producing": {
+    "name": "Safety Certificate for Steel Producing",
+    "description": "Required for steel worker.",
+    "formation_time": -30
+  },
+  "experience_steel_producing": {
+    "name": "Steel Producing Experience",
+    "description": "Steel Producing Experience.",
+    "formation_time": -360
+  }
+}

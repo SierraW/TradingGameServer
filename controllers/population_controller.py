@@ -6,7 +6,7 @@ from controllers.random_controller import check_random_result
 from data import GameData
 from models.cities.personality.Human import Human
 from models.cities.City import City
-from models.cities.HumanOffer import HumanOffer
+from models.cities.personality.PersonalityOffer import PersonalityOffer
 from models.cities.personality.Population import Population
 from models.cities.property.Property import Property
 from controllers.financial_controller import transfer, financial_count, get_population_fe_id
@@ -147,21 +147,21 @@ def get_a_job(game_data: GameData, human: Human, city: City):
         desired_level -= 1
     if len(offers) > 0:
         offer = sorted(offers, key=lambda human_offer: human_offer.one_time_payment, reverse=True)[0]
-        accept_offer(game_data=game_data, city=city, human=human, human_offer=offer)
+        accept_offer(game_data=game_data, city=city, human=human, offer=offer)
 
 
-def accept_offer(game_data: GameData, city: City, human: Human, human_offer: HumanOffer):
-    if human_offer.one_time_payment > 0:
-        if not transfer(game_data=game_data, sender_fe_id=human_offer.company_id,
+def accept_offer(game_data: GameData, city: City, human: Human, offer: PersonalityOffer):
+    if offer.one_time_payment > 0:
+        if not transfer(game_data=game_data, sender_fe_id=offer.company_id,
                         receiver_fe_id=get_population_fe_id(population=city.population, level=human.level),
                         currency_id=city.currency_id,
-                        amount=human_offer.one_time_payment):
+                        amount=offer.one_time_payment):
             return
-    human.property_id = human_offer.property_id
-    city.population.offers.remove(human_offer)
+    human.property_id = offer.property_id
+    city.population.offers.remove(offer)
 
 
-def find_offer_by_level(level: int, population: Population) -> list[HumanOffer]:
+def find_offer_by_level(level: int, population: Population) -> list[PersonalityOffer]:
     return list(filter(lambda offer: offer.level == level, population.offers))
 
 

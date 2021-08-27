@@ -3,7 +3,7 @@ from controllers.market_controller import market_get_market_listings_by_category
     market_register_product
 from controllers.property_controller import get_property_listings, property_purchase_property, property_get_property
 from controllers.storage_controller import storage_check_storage_by_type, storage_get_products_by_category
-from models.Company import Company
+from models.cities.company.Company import Company
 from models.GameData import GameData
 
 

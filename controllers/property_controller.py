@@ -5,7 +5,7 @@ from controllers.market_controller import market_get_recommended_pricing, get_pr
 from controllers.population_controller import get_employees, get_employee_salary, \
     unemployed_all_employees_except, remove_all_previous_offer_by_property_id, send_offer, unemployed
 from controllers.storage_controller import *
-from models.Company import Company
+from models.cities.company.Company import Company
 from models.GameData import GameData
 from models.cities.personality.Human import Human
 from models.PropertyListing import PropertyListing
@@ -145,18 +145,12 @@ def get_estimated_income_per_year(game_data: GameData, city: City, production: P
     return income
 
 
-def property_generate_property(game_data: GameData, city_id: str, city: City = None, name: str = None):
+def property_generate_property(game_data: GameData, city_id: str, name: str):
     prop_id = game_data.generate_identifier()
-    if city is None:
-        from controllers.city_controller import city_get_city
-        city = city_get_city(game_data=game_data, city_id=city_id)
-    city.property_counter += 1
-    storage_id = storage_create_a_storage(game_data=game_data, location=prop_id, owner_fe_id=city.financial_id,
-                                          city_id=city_id)
-    game_data.properties[prop_id] = Property(city_id=city.city_id,
-                                             name=name if name is not None else f'No.{city.property_counter}',
-                                             financial_id=city.financial_id, auto_managed=False,
-                                             storage_id=storage_id)
+    game_data.properties[prop_id] = Property(city_id=city_id,
+                                             name=name,
+                                             financial_id=city_id,
+                                             size=3)
     return prop_id
 
 

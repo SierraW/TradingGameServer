@@ -1,3 +1,5 @@
+import json
+
 from models.TGEnviroment import TGEnvironment
 
 
@@ -14,12 +16,23 @@ class GameData(object):
         self.property_listings = dict()
         self.market_listings = dict()
         self.properties = dict()
-        self.products = dict()
         self.buffs = dict()
         self.currencies = dict()
         self.market_reports = dict()
         self.user_profiles = dict()
         self.company_stock_listings = dict()
+
+        self.humans = dict()
+        self.career_fair = dict()
+        self.work_contracts = dict()
+        self.families = dict()
+        self.company_scopes = dict()
+        self.company_types = dict()
+        self.experiences = dict()
+        self.products = dict()
+        self.productions = dict()
+        self.structures = dict()
+        self.extras = dict()
 
     def generate_identifier(self) -> str:
         self.environment.identifier_factory += 1

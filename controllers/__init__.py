@@ -15,8 +15,10 @@ def day_end_loop(game_data: GameData):
     # record submit
     init_records(game_data=game_data)
 
-    # production
+    # production.json
     properties_loop(game_data=game_data)
 
     # market_listings
     market_listings_loop(game_data=game_data)
+
+    game_data.environment.time.elipse()

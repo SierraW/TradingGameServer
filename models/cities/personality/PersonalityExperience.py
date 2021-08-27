@@ -1,5 +1,14 @@
 class PersonalityExperience(object):
-    def __init__(self, experience_name: str, experience_description: str, experience_formation_time: int):
-        self.experience_name = experience_name
-        self.experience_description = experience_description
-        self.experience_formation_time = experience_formation_time
+    def __init__(self, name: str, description: str, formation_time: int):
+        self.name = name
+        self.description = description
+        self.formation_time = formation_time
+
+    @staticmethod
+    def from_dict(source):
+        return PersonalityExperience(name=source['name'],
+                                     description=source['description'],
+                                     formation_time=source['formation_time'])
+
+    def __repr__(self):
+        return f'Experience: {self.name} {self.formation_time}'

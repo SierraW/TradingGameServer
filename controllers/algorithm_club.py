@@ -1,4 +1,19 @@
+import random
+
 from models.cities.personality.Human import Human
+
+
+def random_choice(choice: list):
+    return random.choice(choice)
+
+def random_range(range_list: list[int]) -> int:
+    return random.randint(range_list[0], range_list[1])
+
+
+def random_check(possibility: float) -> bool:
+    if possibility > 1:
+        return True
+    return random.random() < possibility
 
 
 def find_most_common_level(humans: list[Human]) -> int:

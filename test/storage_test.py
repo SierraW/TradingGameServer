@@ -10,15 +10,15 @@ apple_id = 'apple is inner ghost'
 apple = Product(name='apple', category=0, items_per_stack=60)
 
 product_stack_1 = ProductStack(product_id=apple_id, product=apple, product_info_dict={
-    ProductInformation(charm=100, production_t_plus=0): 1
+    ProductInformation(charming=100, production_t_plus=0): 1
 })
 
 product_stack_100 = ProductStack(product_id=apple_id, product=apple, product_info_dict={
-    ProductInformation(charm=100, production_t_plus=0): 100
+    ProductInformation(charming=100, production_t_plus=0): 100
 })
 
 product_stack_1000 = ProductStack(product_id=apple_id, product=apple, product_info_dict={
-    ProductInformation(charm=100, production_t_plus=0): 1000
+    ProductInformation(charming=100, production_t_plus=0): 1000
 })
 
 print(storage_a)

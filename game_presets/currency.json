@@ -1,0 +1,12 @@
+{
+  "currency_cad": {
+    "name": "Canadian Dollar",
+    "prefix": "CAD",
+    "symbol": "$"
+  },
+  "currency_usd": {
+    "name": "United State Dollar",
+    "prefix": "USD",
+    "symbol": "$"
+  }
+}

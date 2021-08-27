@@ -17,7 +17,7 @@ from models.geometry.Country import Country
 from models.geometry.Currency import Currency
 
 
-# 0 user / 1 company / 2 heidal_city / 3 country / 4 market / 5 population
+# 0 user / 1 company / 2 city / 3 country / 4 market / 5 population / 6 family
 def generate_financial_entity(game_data: GameData, name: str, entity_type: int,
                               initial_fund_map: dict = None) -> str:
     fe = FinancialEntity(name=name, entity_type=entity_type)
@@ -50,7 +50,7 @@ def generate_city(game_data: GameData, country_id: str, name: str, market_name: 
                                      salaries=population_salaries)
 
     city = City(country_id=country_id, name=name, financial_id=financial_id, currency_id=currency_id,
-                land_tax_rate=land_tax_rate, population=population)
+                land_tax_rate_per_=land_tax_rate, population=population)
     city.city_id = city_id
     city.market_id = generate_market(game_data=game_data, name=market_name, financial_name=market_financial_name,
                                      currency_id=currency_id, handling_fee_rate=market_handle_fee_rate,
@@ -165,7 +165,7 @@ def init_game_with_defaults(game_data: GameData):
         },
     ]
 
-    # production
+    # production.json
     wheat_field = Production(name='小麦田', products={wheat: 1},
                              product_multiplier=[192, 720, 1834, 4000], duration=60, level=0)
     wheat_field.production_multiplier = 1

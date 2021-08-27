@@ -12,8 +12,8 @@ def financial_get_financial_entity(game_data: GameData, financial_id: str) -> Fi
     return game_data.financial_entities[financial_id]
 
 
-def register_financial_entity(game_data: GameData, name: str, entity_type: int) -> str:
-    fe = FinancialEntity(name=name, entity_type=entity_type)
+def register_financial_entity(game_data: GameData, name: str, entity_type: int, currency_dict: dict = None) -> str:
+    fe = FinancialEntity(name=name, entity_type=entity_type, currency_dict=currency_dict)
     fe_id = game_data.generate_identifier()
     game_data.financial_entities[fe_id] = fe
     return fe_id
@@ -35,7 +35,23 @@ def verify(game_data: GameData, fe_id: str) -> bool:
     return fe_id in game_data.financial_entities
 
 
-def transfer(game_data: GameData, sender_fe_id: str, receiver_fe_id: str, currency_id, amount) -> bool:
+def transfer_all(game_data: GameData, sender_fe_id: str, receiver_fe_id: str):
+    if sender_fe_id in game_data.financial_entities and receiver_fe_id in game_data.financial_entities:
+        sender_fe = game_data.financial_entities[sender_fe_id]
+        receiver_fe = game_data.financial_entities[receiver_fe_id]
+        t_plus = game_data.environment.time.get_t_plus_from_now()
+        for currency_id, amount in sender_fe.wallet.currencies.items():
+            if amount == 0:
+                continue
+            _pay(fe=sender_fe, currency_id=currency_id, amount=amount)
+            _receive(fe=receiver_fe, currency_id=currency_id, amount=amount)
+            _record(fe=sender_fe, target_fe_id=receiver_fe_id, target_fe=receiver_fe, currency_id=currency_id,
+                    amount=-amount, success=True, t_plus=t_plus)
+            _record(fe=receiver_fe, target_fe_id=sender_fe_id, target_fe=sender_fe, currency_id=currency_id,
+                    amount=amount, success=True, t_plus=t_plus)
+
+
+def transfer(game_data: GameData, sender_fe_id: str, receiver_fe_id: str, currency_id: str, amount: int) -> bool:
     success = False
     if sender_fe_id in game_data.financial_entities and receiver_fe_id in game_data.financial_entities:
         sender_fe = game_data.financial_entities[sender_fe_id]

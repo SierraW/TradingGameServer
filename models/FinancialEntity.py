@@ -3,10 +3,12 @@ from models.Wallet import Wallet
 
 
 class FinancialEntity(object):
-    def __init__(self, name: str, entity_type: int):
+    def __init__(self, name: str, entity_type: int, currency_dict: dict = None):
         self.name = name
         self.entity_type = entity_type
         self.wallet = Wallet()
+        if currency_dict is not None:
+            self.wallet.currencies = currency_dict
         self.stock_wallet = StockWallet()
 
     @staticmethod

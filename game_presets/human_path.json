@@ -1,0 +1,10 @@
+{
+  "all_time_req": {
+    "clothes": 1,
+  },
+  "life_req": {
+    "electronic": 24,
+    "vehicle": 60,
+    "property": 9999
+  }
+}

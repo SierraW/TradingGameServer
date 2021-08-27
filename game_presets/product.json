@@ -1,0 +1,92 @@
+{
+  "product_wheat": {
+              "name": "Wheat",
+              "category": 0,
+              "items_per_stack": 99
+            },
+  "product_beef": {
+              "name": "Beef",
+              "category": 0,
+              "items_per_stack": 99
+            },
+  "product_fish": {
+              "name": "Fish",
+              "category": 0,
+              "items_per_stack": 99
+            },
+  "product_wood": {
+              "name": "Wood",
+              "category": 1,
+              "items_per_stack": 99
+            },
+  "product_iron_ore": {
+              "name": "Iron",
+              "category": 1,
+              "items_per_stack": 99
+            },
+  "product_rubber": {
+              "name": "Rubber",
+              "category": 1,
+              "items_per_stack": 99
+            },
+  "product_sand": {
+              "name": "Sand",
+              "category": 1,
+              "items_per_stack": 99
+            },
+  "product_gold_ore": {
+              "name": "Gold Ore",
+              "category": 1,
+              "items_per_stack": 99
+            },
+  "product_steel": {
+              "name": "Steel",
+              "category": 2,
+              "items_per_stack": 99
+            },
+  "product_gold": {
+              "name": "Gold",
+              "category": 2,
+              "items_per_stack": 99
+            },
+  "product_glass": {
+              "name": "Glass",
+              "category": 2,
+              "items_per_stack": 99
+            },
+  "product_clothes": {
+              "name": "Glass",
+              "category": 2,
+              "items_per_stack": 99
+            },
+  "product_processor": {
+              "name": "Processor",
+              "category": 3,
+              "items_per_stack": 99
+            },
+  "product_electronic": {
+              "name": "Electronic",
+              "category": 3,
+              "items_per_stack": 99
+            },
+  "product_vehicle": {
+              "name": "Vehicle",
+              "category": 3,
+              "items_per_stack": 1
+            },
+  "product_virtual_workforce": {
+              "name": "Workforce(Construction)",
+              "category": 5,
+              "items_per_stack": 9999
+            },
+  "product_virtual_workforce_level_2": {
+              "name": "Advanced Workforce(Construction)",
+              "category": 5,
+              "items_per_stack": 9999
+            },
+  "product_virtual_management_force_": {
+              "name": "Advanced Workforce(Construction)",
+              "category": 5,
+              "items_per_stack": 9999
+            }
+}

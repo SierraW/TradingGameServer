@@ -1,5 +1,5 @@
 from models.cities.personality.Human import Human
-from models.cities.HumanOffer import HumanOffer
+from models.cities.personality.PersonalityOffer import PersonalityOffer
 
 
 class Population(object):
@@ -19,7 +19,7 @@ class Population(object):
         if 'humans' in source:
             population.humans = list(map(lambda human_dict: Human.from_dict(human_dict), source['humans']))
         if 'offers' in source:
-            population.offers = list(map(lambda offer: HumanOffer.from_dict(offer), source['offers']))
+            population.offers = list(map(lambda offer: PersonalityOffer.from_dict(offer), source['offers']))
         return population
 
     def to_dict(self):

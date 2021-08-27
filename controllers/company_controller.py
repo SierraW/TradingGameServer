@@ -4,7 +4,7 @@ from controllers.property_controller import get_properties, get_employees, prope
     get_employee_salary, property_remove_task
 from controllers.stock_controller import stock_arrange_initial_stock
 from data import GameData
-from models.Company import Company
+from models.cities.company.Company import Company
 from models.cities.City import City
 
 
