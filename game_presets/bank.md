@@ -10,7 +10,18 @@
   "reserve_ratio": 0.054,
   "deposit_products": [
     {
-      "name": "Small amount "
+      "name": "Flexible Deposit",
+      "limit": null,
+      "rate": 0.005,
+      "expiry_days": null,
+      "owner_permissions": "io"
+    },
+    {
+      "name": "One Year Deposit",
+      "limit": null,
+      "rate": 0.009,
+      "expiry_days": 365,
+      "owner_permissions": ""
     }
   ],
   "loan_product": {

@@ -14,7 +14,6 @@ class Property(object):
         self.financial_id = financial_id
         self.work_contract_id_list = work_contract_id_list
 
-
         self.structure = structure
 
         self.size = size

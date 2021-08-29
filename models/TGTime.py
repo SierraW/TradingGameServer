@@ -148,7 +148,11 @@ class TGTime(object):
         return week_str[self.weekday]
 
     def __repr__(self):
-        return f'{self.year}-{self.print_season()}-{self.day + 1} {self.print_weekday()}'
+        return f'{self.year}-{self.print_season()}-{self.day + 1} ' \
+               f'{self.print_weekday()}'
+
+    def __hash__(self):
+        return self.__repr__().__hash__()
 
     def get_t_plus_from_now(self, year: int = 0, month: int = 0, day: int = 0) -> int:
         new_year = year + self.year
