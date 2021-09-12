@@ -1,0 +1,86 @@
+{
+  "management_investment_company": {
+    "name": "Investment Company Management Office",
+    "required_structures": {
+      "structure_unit_medium": {
+        "bonus": 1
+      },
+      "_none": {
+        "bonus": 0.5
+      }
+    },
+    "workforce": {
+      "positions": [
+        {
+          "title": "",
+          "required": true,
+          "contracts": [],
+          "count": 1,
+          "experience_efficiency": [
+            {
+              "experience_id": "experience_bachelor_of_commerce",
+              "curve": 260,
+              "stages": [
+                {
+                  "stage": 0,
+                  "workforce": 1
+                }
+              ]
+            }
+          ],
+          "experience_acquire": [
+            {
+              "id": "experience_id",
+              "chance": 1
+            }
+          ]
+        },
+        {
+          "title": "Land Manager",
+          "required": false,
+          "contracts": [],
+          "count": 10,
+          "experience_efficiency": [
+            {
+              "experience_id": "experience_1",
+              "curve": 260,
+              "stages": [
+                {
+                  "stage": 0,
+                  "workforce": 1
+                }
+              ]
+            }
+          ],
+          "experience_acquire": [
+            {
+              "id": "experience_id",
+              "chance": 1
+            }
+          ]
+        }
+      ],
+      "bonus": [
+        {
+          "type": "quality",
+          "curve": 100,
+          "stages": [
+            {
+              "stage": 1,
+              "bonus": 20
+            },
+            {
+              "stage": 3,
+              "bonus": 30
+            },
+            {
+              "stage": 9,
+              "bonus": 40
+            }
+          ]
+        }
+      ],
+      "bonus_package": {}
+    }
+  }
+}

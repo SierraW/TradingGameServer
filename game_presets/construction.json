@@ -1,0 +1,176 @@
+{
+  "construction_highrise": {
+    "name": "Highrise Construction",
+    "property_id": null,
+    "consume": [
+      {
+        "product_id": "product_wood",
+        "amount_per_workforce": 1
+      }
+    ],
+    "required_structures": {
+      "structure_unit_medium": {
+        "bonus": 1
+      },
+      "_none": {
+        "bonus": 0.5
+      }
+    },
+    "workforce": {
+      "amount": -1000,
+      "positions": [
+        {
+          "title": "Builder",
+          "required": true,
+          "contracts": [],
+          "count": 10,
+          "experience_efficiency": [
+            {
+              "experience_id": "experience_field",
+              "curve": 260,
+              "stages": [
+                {
+                  "stage": 10,
+                  "workforce": 0
+                }
+              ]
+            }
+          ],
+          "experience_acquire": [
+            {
+              "id": "experience_id",
+              "chance": 1
+            }
+          ]
+        },
+        {
+          "title": "Construction Manager",
+          "required": false,
+          "contracts": [],
+          "count": 1,
+          "experience_efficiency": [
+            {
+              "experience_id": "experience_field",
+              "curve": 260,
+              "stages": [
+                {
+                  "stage": 0,
+                  "workforce": 1
+                }
+              ]
+            }
+          ],
+          "experience_acquire": [
+            {
+              "id": "experience_field",
+              "chance": 1
+            }
+          ]
+        }
+      ],
+      "bonus": [
+      ],
+      "bonus_package": {}
+    }
+  },
+  "construction_medium_room": {
+    "name": "Medium Room Construction",
+    "property_id": null,
+    "consume": [
+      {
+        "product_id": "product_wood",
+        "amount_per_workforce": 1
+      }
+    ],
+    "required_structures": {
+      "structure_unit_medium": {
+        "bonus": 1
+      },
+      "_none": {
+        "bonus": 0.5
+      }
+    },
+    "workforce": {
+      "amount": -100,
+      "positions": [
+        {
+          "title": "Builder",
+          "required": true,
+          "contracts": [],
+          "count": 10,
+          "experience_efficiency": [
+            {
+              "experience_id": "experience_field",
+              "curve": 260,
+              "stages": [
+                {
+                  "stage": 0,
+                  "workforce": 1
+                }
+              ]
+            }
+          ],
+          "experience_acquire": [
+            {
+              "id": "experience_field",
+              "chance": 1
+            }
+          ]
+        }
+      ],
+      "bonus": [
+      ],
+      "bonus_package": {}
+    }
+  },
+  "construction_small_room": {
+    "name": "Small Room Construction",
+    "property_id": null,
+    "consume": [
+      {
+        "product_id": "product_wood",
+        "amount_per_workforce": 1
+      }
+    ],
+    "required_structures": {
+      "structure_unit_medium": {
+        "bonus": 1
+      },
+      "_none": {
+        "bonus": 0.5
+      }
+    },
+    "workforce": {
+      "amount": -50,
+      "positions": [
+        {
+          "title": "Builder",
+          "required": true,
+          "contracts": [],
+          "count": 10,
+          "experience_efficiency": [
+            {
+              "experience_id": "experience_field",
+              "curve": 260,
+              "stages": [
+                {
+                  "stage": 0,
+                  "workforce": 1
+                }
+              ]
+            }
+          ],
+          "experience_acquire": [
+            {
+              "id": "experience_field",
+              "chance": 1
+            }
+          ]
+        }
+      ],
+      "bonus": [
+      ],
+      "bonus_package": {}
+    }
+  }
+}

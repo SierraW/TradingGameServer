@@ -1,5 +1,3 @@
-import json
-
 from controllers.game_initialize_controller import init_from_local_essential
 from models.GameData import GameData
 

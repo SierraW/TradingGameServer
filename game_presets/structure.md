@@ -5,15 +5,11 @@
 {
   "name": "The Name",
   "storage_space": 50,
-  "structure_build_contract": {
-    "work_force": 1000,
-    "experience_required": [
-      "experience_1", "experience_2"
-    ],
-    "material_required_per_work_force": {
-      "material_1": 1,
-      "material_2": 2
-    }
+  "construction": {
+    "complete": false,
+    "workforce_done": 0,
+    "construction_template": "construction_highrise",
+    "construction_id": null
   },
   "bonus_package": {
     "designo_multiplier": 0.1,

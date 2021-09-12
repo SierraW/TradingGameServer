@@ -154,6 +154,9 @@ class TGTime(object):
     def __hash__(self):
         return self.__repr__().__hash__()
 
+    def less_than_or_equal_to(self, now) -> bool:
+        return now.year <= self.year and now.month <= self.month and now.day <= self.day
+
     def get_t_plus_from_now(self, year: int = 0, month: int = 0, day: int = 0) -> int:
         new_year = year + self.year
         new_month = month + self.month

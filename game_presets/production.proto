@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package ptg;
+
+
+message Production {
+  message Product {
+    string product_id = 1;
+    int32 amount = 2;
+  }
+
+  string name = 1;
+  Product product = 2;
+  optional Product consume = 3;
+  int32 production_t_plus = 4;
+}

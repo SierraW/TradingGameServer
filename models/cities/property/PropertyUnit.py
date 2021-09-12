@@ -1,4 +1,4 @@
-from models.cities.property.Production import Production
+from models.cities.business.Production import Production
 
 
 class PropertyUnit(object):

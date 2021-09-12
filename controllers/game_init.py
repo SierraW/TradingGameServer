@@ -12,7 +12,7 @@ from models.cities.Market import Market
 from models.cities.personality.PersonalityExperience import PersonalityExperience
 from models.cities.personality.Population import Population
 from models.cities.property.Product import Product
-from models.cities.property.Production import Production
+from models.cities.business.Production import Production
 from models.geometry.Country import Country
 from models.geometry.Currency import Currency
 

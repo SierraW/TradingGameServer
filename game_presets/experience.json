@@ -1,7 +1,7 @@
 {
-  "experience_bachelor_of_engineering": {
-    "name": "Field",
-    "description": "Learned from working at field.",
+  "experience_bachelor_of_commerce": {
+    "name": "Commerce",
+    "description": "To be fill.",
     "formation_time": -260
   },
   "experience_bachelor_of_education": {
@@ -21,6 +21,11 @@
   },
   "experience_field": {
     "name": "Field Experience",
+    "description": "Knowledge about farming.",
+    "formation_time": 0
+  },
+  "experience_field_management": {
+    "name": "Field Management Experience",
     "description": "Knowledge about farming.",
     "formation_time": 0
   },

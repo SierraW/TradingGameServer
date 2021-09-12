@@ -4,7 +4,7 @@ from models.TGTime import TGTime
 class Company(object):
     def __init__(self, financial_id: str, city_id: str, total_stock: int,
                  company_type: int, auto_managed: bool,
-                 date_create: TGTime, registered_property_id: str,
+                 date_create: TGTime, registered_property_id: str = None,
                  businesses: list = None):
         self.financial_id = financial_id
         self.city_id = city_id

@@ -1,7 +1,4 @@
 from models.cities.Market import Market
-from models.cities.personality.Population import Population
-from models.cities.property.Production import Production
-from models.cities.property.Structure import Structure
 
 
 class City(object):

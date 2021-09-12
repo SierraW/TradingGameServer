@@ -31,6 +31,7 @@ class GameData(object):
         self.experiences = dict()
         self.products = dict()
         self.productions = dict()
+        self.management = dict()
         self.structures = dict()
         self.extras = dict()
 

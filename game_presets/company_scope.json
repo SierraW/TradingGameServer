@@ -1,36 +1,16 @@
 {
+  "company_scope_investment": {
+    "name": "Investment",
+    "designated_business": ["management_investment_company"]
+  },
   "company_scope_education": {
     "name": "Education",
-    "designated_structure": [
-      "structure_school",
-      "structure_campus"
-    ]
+    "designated_business": []
   },
   "company_scope_agriculture": {
     "name": "Agriculture",
-    "designated_structure": [
-      "structure_field",
-      "structure_orchard",
-      "structure_fishery"
-    ]
-  },
-  "company_scope_resource": {
-    "name": "Resource Gathering and Mining",
-    "designated_structure": [
-      "structure_forest",
-      "structure_iron_mine"
-    ]
-  },
-  "company_scope_advanced_manufacturer": {
-    "name": "Advanced Manufacturing",
-    "designated_structure": [
-      "structure_car_plant"
-    ]
-  },
-  "company_scope_advanced_manufacturer": {
-    "name": "Advanced Manufacturing",
-    "designated_structure": [
-      "structure_car_plant"
+    "designated_business": [
+      "production_wheat_farming"
     ]
   }
 }

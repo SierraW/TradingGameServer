@@ -1,5 +1,5 @@
 class Product(object):
-    def __init__(self, name: str, category: int, items_per_stack: int):
+    def __init__(self, name: str, category: int, items_per_stack: int = None):
         self.name = name
         self.category = category
         self.items_per_stack = items_per_stack

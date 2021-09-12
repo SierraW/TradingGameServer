@@ -1,16 +1,29 @@
 {
+  "structure_open_": {
+    "name": "Field",
+    "storage_space": 50,
+    "construction": {
+      "complete": false,
+      "workforce_done": 0,
+      "construction_template": "construction_small_room",
+      "construction_id": null
+    },
+    "bonus_package": {
+      "designo_multiplier": 0.1,
+      "software_solution_multiplier": 0.1,
+      "raw_material_multiplier": 0,
+      "employee_experience_multiplier": 0
+    }
+  },
   "structure_field": {
     "name": "Field",
     "storage_space": 50,
-    "product_required_type_list": [
-      "product_virtual_workforce"
-    ],
-    "product_required_amount_list": [
-      1000
-    ],
-    "product_required_quality_list": [
-      60
-    ],
+    "construction": {
+      "complete": false,
+      "workforce_done": 0,
+      "construction_template": "construction_small_room",
+      "construction_id": null
+    },
     "bonus_package": {
       "designo_multiplier": 0.1,
       "software_solution_multiplier": 0.1,
@@ -18,91 +31,49 @@
       "employee_experience_multiplier": 0
     }
   },
-  "structure_school": {
-    "name": "School",
-    "storage_space": 50,
-    "product_required_type_list": [
-      "product_virtual_workforce_level_2"
-    ],
-    "product_required_amount_list": [
-      10000
-    ],
-    "product_required_quality_list": [
-      70
-    ],
-    "bonus_package": {
-      "designo_multiplier": 0.1,
-      "software_solution_multiplier": 0.1,
-      "raw_material_multiplier": 0,
-      "employee_experience_multiplier": 0
-    }
-  },
-  "structure_campus": {
-    "name": "Campus",
-    "storage_space": 50,
-    "product_required_type_list": [
-      "product_virtual_workforce_level_2"
-    ],
-    "product_required_amount_list": [
-      10000
-    ],
-    "product_required_quality_list": [
-      70
-    ],
-    "bonus_package": {
-      "designo_multiplier": 0.1,
-      "software_solution_multiplier": 0.1,
-      "raw_material_multiplier": 0,
-      "employee_experience_multiplier": 0
-    }
-  },
-  "structure_unit_medium": {
-    "name": "Medium Unit",
-    "storage_space": 50,
-    "product_required_type_list": [
-      "product_workforce_wood"
-    ],
-    "product_required_amount_list": [
-      1000
-    ],
-    "product_required_quality_list": [
-      0.7
-    ],
+  "structure_unit_small": {
+    "name": "Small Unit",
+    "storage_space": 5,
+    "construction": {
+      "complete": false,
+      "workforce_done": 0,
+      "construction_template": "construction_small_room",
+      "construction_id": null
+    },
     "bonus_package": {
       "designo_multiplier": 0.1,
       "software_solution_multiplier": 0.5,
       "raw_material_multiplier": 0,
       "employee_experience_multiplier": 0.02
     },
-    "unit_name_and_property_id_dict": {
-      "unit_generation_guideline": [
-        {
-          "number_of_area": 3,
-          "number_of_unit_per_area": 1,
-          "unit_size": 2,
-          "structure_id": "structure_room_medium"
-        },
-        {
-          "number_of_area": 34,
-          "number_of_unit_per_area": 12,
-          "unit_size": 1,
-          "structure_id": "structure_room_small"
-        }
-      ]
-    }
+    "unit_name_and_property_id_dict": {}
+  },
+  "structure_unit_medium": {
+    "name": "Medium Unit",
+    "storage_space": 15,
+    "construction": {
+      "complete": false,
+      "workforce_done": 0,
+      "construction_template": "construction_medium_room",
+      "construction_id": null
+    },
+    "bonus_package": {
+      "designo_multiplier": 0.1,
+      "software_solution_multiplier": 0.5,
+      "raw_material_multiplier": 0,
+      "employee_experience_multiplier": 0.02
+    },
+    "unit_name_and_property_id_dict": {}
   },
   "structure_building_highrise": {
     "name": "Highrise building",
     "storage_space": 50,
-    "product_required_type_list": [
-      "product_workforce_wood"
-    ],
-    "product_required_amount_list": [
-      1000
-    ],
-    "product_required_quality_list": [
-      0.7
-    ],
+    "construction": {
+      "complete": false,
+      "workforce_done": 0,
+      "construction_template": "construction_highrise",
+      "construction_id": null
+    },
     "bonus_package": {
       "designo_multiplier": 0.1,
       "software_solution_multiplier": 0.5,
